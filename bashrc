@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 # Kubernetes
-alias k='kubecolor'
+alias k='kubectl'
 alias d='docker'
 alias h='helm'
 
