@@ -173,9 +173,16 @@ PS1+='\[\e[1;33m\]$(prompt_k8s)\[\033[00m\]'
 
 alias kn='kubens'
 alias kc='kubectx'
+alias kgp='kubectl get pods'
+alias kd='kubectl describe'
+alias kf='kubectl apply -f'
+
+export d="--dry-run=client -o yaml"
+
 source $path/kubectx/completions/kubens.bash
 source $path/kubectx/completions/kubectx.bash
 source $path/git-prompt.sh
 
 PS1+='$(__git_ps1 "(%s)")\$ '
 
+set -o vi
