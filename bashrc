@@ -1,3 +1,4 @@
+set -o vi
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -40,6 +41,10 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
+case "$TERM" in
+    xterm-color|xterm-kitty) color_prompt=yes;;
+esac
+
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -61,7 +66,7 @@ if [ "$color_prompt" = yes ]; then
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
+#unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -183,6 +188,10 @@ source $path/kubectx/completions/kubens.bash
 source $path/kubectx/completions/kubectx.bash
 source $path/git-prompt.sh
 
-PS1+='$(__git_ps1 "(%s)")\$ '
+PS1+='\e[0;33m$(__git_ps1 "(%s)")\e[m'
 
 set -o vi
+
+set bell-style none
+
+export PATH=$PATH:~/Rider/2.4/bin
