@@ -195,11 +195,9 @@ PS1+='\e[0;33m$(__git_ps1 "(%s)")\e[m'
 
 set -o vi
 
-<<<<<<< Updated upstream
 set bell-style none
 
 export PATH=$PATH:~/Rider/2.4/bin
-=======
 export DOTNET_ROOT=$HOME/.dotnet
 
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
@@ -222,4 +220,3 @@ function uuid_gen(){
         uuidgen
     fi
 }
->>>>>>> Stashed changes
