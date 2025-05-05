@@ -176,12 +176,14 @@ prompt_k8s(){
 path=~/git/dotfiles
     
 PS1+='\[\e[1;33m\]$(prompt_k8s)\[\033[00m\]'
-
+alias bat='batcat'
 alias kn='kubens'
 alias kc='kubectx'
 alias kgp='kubectl get pods'
 alias kd='kubectl describe'
 alias kf='kubectl apply -f'
+alias ds='sudo service docker start'
+alias dst='sudo service docker status'
 
 export d="--dry-run=client -o yaml"
 
@@ -193,6 +195,31 @@ PS1+='\e[0;33m$(__git_ps1 "(%s)")\e[m'
 
 set -o vi
 
+<<<<<<< Updated upstream
 set bell-style none
 
 export PATH=$PATH:~/Rider/2.4/bin
+=======
+export DOTNET_ROOT=$HOME/.dotnet
+
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+export KUBECONFIG=$HOME/.kube/config
+#for conf in $(ls ~/.kube/my-config/*.config); do
+#    export KUBECONFIG=$KUBECONFIG:$conf
+#done
+
+function jwt_decode(){
+    jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$1"
+}
+
+function uuid_gen(){
+    echo $0
+    echo $1
+    if [$0]; then
+        uuidgen | tr -d '-'
+    else
+        uuidgen
+    fi
+}
+>>>>>>> Stashed changes
