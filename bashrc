@@ -184,6 +184,10 @@ alias kd='kubectl describe'
 alias kf='kubectl apply -f'
 alias ds='sudo service docker start'
 alias dst='sudo service docker status'
+alias browser='nohup firefox > /dev/null 2>&1 &'
+alias music='nohup spotify > /dev/null 2>&1 &'
+alias notas='nohup obsidian > /dev/null 2>&1 &'
+alias desligar='sudo poweroff'
 
 export d="--dry-run=client -o yaml"
 
