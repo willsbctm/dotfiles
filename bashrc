@@ -61,17 +61,16 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-PS1+='\e[0;33m$(__git_ps1 "(%s)")\e[m'
+PS1+='\[\e[0;33m\]$(__git_ps1 "(%s)")\[\e[m\]'
 if [ "$color_prompt" = yes ]; then
-    PS1='\e[0;33m[\e[m${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033[00m\]\e[0;33m]\e[m\$ '
+    PS1='\[\e[0;33m\][\e[m${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\u:\[\e[01;34m\]\w\[\e[00m\]\[\e[0;33m\]]\[\e[m\]\$ '
 else
-    PS1='[${debian_chroot:+($debian_chroot)}\u:\w\]$ '
+    PS1='[${debian_chroot:+($debian_chroot)}\u:\w]$ '
 fi
-#unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
+# Title in xterm-compatible terminals (including Kitty)
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|xterm-kitty)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
@@ -175,7 +174,7 @@ prompt_k8s(){
     
 path=~/git/dotfiles
     
-PS1+='\[\e[1;33m\]$(prompt_k8s)\[\033[00m\]'
+PS1+='\[\e[1;33m\]$(prompt_k8s)\[\e[00m\]'
 alias bat='batcat'
 alias kn='kubens'
 alias kc='kubectx'
@@ -195,7 +194,7 @@ source $path/kubectx/completions/kubens.bash
 source $path/kubectx/completions/kubectx.bash
 source $path/git-prompt.sh
 
-PS1+='\e[0;33m$(__git_ps1 "(%s)")\e[m'
+PS1+='\[\e[0;33m\]$(__git_ps1 "(%s)")\[\e[m\]'
 
 set -o vi
 
@@ -213,6 +212,10 @@ export KUBECONFIG=$HOME/.kube/config
 
 function jwt_decode(){
     jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$1"
+}
+
+function preview(){
+    kitty +kitten icat "$1"
 }
 
 function uuid_gen(){
